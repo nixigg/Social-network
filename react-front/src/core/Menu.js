@@ -19,6 +19,11 @@ const Menu = ({ history }) => {
             Home
           </Link>
         </li>
+        <li className="nav-item">
+          <Link className="nav-link" style={isActive(history, "/users")} to="/users">
+            Users
+          </Link>
+        </li>
         {!isAuthenticated() && (
           <>
             <li className="nav-item">
@@ -44,7 +49,7 @@ const Menu = ({ history }) => {
         {isAuthenticated() && (
           <>
             <li className="nav-item">
-              <a
+              <span
                 className="nav-link"
                 style={
                   (isActive(history, "/signup"),
@@ -53,13 +58,13 @@ const Menu = ({ history }) => {
                 onClick={() => signout(() => history.push("/"))}
               >
                 Sign Out
-              </a>
+              </span>
             </li>
             <li className="nav-item">
               <Link
                 className="nav-link"
                 to={`/user/${isAuthenticated().user._id}`}
-                style={{ color: "#fff" }}
+                style={isActive(history, `/user/${isAuthenticated().user._id}`)}
               >
                 {`${isAuthenticated().user.name}'s profile`}
               </Link>
